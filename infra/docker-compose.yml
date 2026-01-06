@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ../backend
+    container_name: air-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env.example
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:15
+    container_name: air-postgres
+    environment:
+      POSTGRES_USER: airuser
+      POSTGRES_PASSWORD: airpassword
+      POSTGRES_DB: airdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  postgres_data:
