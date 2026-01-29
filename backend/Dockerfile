@@ -1,11 +1,11 @@
-FROM python:3.11-slim
+FROM python:3.11-bookworm
 
 # create working directory
 WORKDIR /app
 
 # install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # copy application
 COPY app ./app
